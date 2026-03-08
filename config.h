@@ -4,9 +4,9 @@
 #include "func.h"
 
 #define N 10000000ULL
-#define DIM 10
-#define LOWER_BOUND -3
-#define UPPER_BOUND 3
+#define DIM 30
+#define LOWER_BOUND -1
+#define UPPER_BOUND 1
 
 extern func_t F;
 

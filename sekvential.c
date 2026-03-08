@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
         total_sum += F(x, DIM);
     }
 
-    double integral = (total_sum/N);
+    double integral = total_sum / N;
     for (uint64_t i = 0; i < DIM; i++) {
         integral *= UPPER_BOUND - LOWER_BOUND;
     }
