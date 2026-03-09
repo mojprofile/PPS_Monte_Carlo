@@ -5,14 +5,14 @@ LDFLAG := -lm
 OBJ := n_gaussian.o uniform_rand.o config.o
 
 
-all: sekvential parallel
+all: sequential parallel
 
 
-sekvential: sekvential.o $(OBJ)
-	$(CC) $(CFLAGS) -o sekvential sekvential.o $(OBJ) $(LDFLAG)
+sequential: sequential.o $(OBJ)
+	$(CC) $(CFLAGS) -o sequential sequential.o $(OBJ) $(LDFLAG)
 
-sekvential.o: sekvential.c config.h utils.h
-	$(CC) $(CFLAGS) -c sekvential.c
+sequential.o: sequential.c config.h utils.h
+	$(CC) $(CFLAGS) -c sequential.c
 
 
 parallel: parallel.o $(OBJ) 
@@ -33,4 +33,4 @@ config.o: config.c config.h func.h
 
 
 clean:
-	rm -f *.o perf* gmon* cachegrind* massif* callgrind* parallel sekvential
+	rm -f *.o perf* gmon* cachegrind* massif* callgrind* parallel sequential
