@@ -10,28 +10,28 @@
 
 int main(int argc, char* argv[])
 {
-    MPI_Init(&argc, &argv);
-
     int rank, size;
+    uint64_t local_N, quet;
+    double local_sum = 0.0, total_sum = 0.0;
+    double* x = malloc(DIM * sizeof(double));
+    if (x == NULL) {
+        return 1;
+    }
+
+    MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
     srand((unsigned int)time(NULL) ^ (rank * 1337));
 
-    uint64_t local_N = N / size;
-    uint64_t quet = N % size;
-    if (rank < quet) 
+    local_N = N / size;
+    quet = N % size;
+    if (rank < quet) {
         local_N++;
-    
-    double local_sum = 0.0, total_sum = 0.0;
-    double* x = malloc(DIM * sizeof(double));
-    if (x == NULL) {
-        MPI_Finalize();
-        return 1;
     }
 
     for (uint64_t i = 0; i < local_N; i++) {
-        for (uint64_t j = 0; j < DIM; j++) {
+        for (size_t j = 0; j < DIM; j++) {
             x[j] = uniform_rand(LOWER_BOUND, UPPER_BOUND);
         }
         local_sum += F(x, DIM);
@@ -41,13 +41,13 @@ int main(int argc, char* argv[])
 
     if (rank == 0) {
         double integral = total_sum / N;
-        for (uint64_t i = 0; i < DIM; i++) {
+        for (size_t i = 0; i < DIM; i++) {
             integral *= UPPER_BOUND - LOWER_BOUND;
         }
         printf("Monte Carlo result: %.8f\n", integral);
     }
 
-    free(x);
     MPI_Finalize();
+    free(x);
     return 0;
 }

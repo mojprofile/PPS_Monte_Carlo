@@ -8,14 +8,14 @@
 
 
 int main(int argc, char* argv[])
-{
-    srand(time(NULL));
-
+{   
     double total_sum = 0.0;
     double* x = malloc(DIM * sizeof(double));
     if (x == NULL) {
         return 1;
     }
+
+    srand(time(NULL));
 
     for (uint64_t i = 0; i < N; i++) {
         for (int j = 0; j < DIM; j++) {
@@ -30,7 +30,6 @@ int main(int argc, char* argv[])
     }
 
     printf("Monte Carlo result: %.8f\n", integral);
-
     free(x);
     return 0;
 }

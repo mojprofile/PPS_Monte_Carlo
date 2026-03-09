@@ -1,6 +1,6 @@
 CC := gcc
 MPICC := mpicc
-CFLAGS := -Wall -Werror -std=c99
+CFLAGS := -O2 -Wall -Werror -std=c99
 LDFLAG := -lm
 OBJ := n_gaussian.o uniform_rand.o config.o
 
@@ -33,4 +33,4 @@ config.o: config.c config.h func.h
 
 
 clean:
-	rm -f *.o parallel sekvential
+	rm -f *.o perf* gmon* cachegrind* massif* callgrind* parallel sekvential

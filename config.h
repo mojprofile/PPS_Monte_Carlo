@@ -4,7 +4,7 @@
 #include "func.h"
 
 #define N 10000000ULL
-#define DIM 30
+#define DIM 20
 #define LOWER_BOUND -1
 #define UPPER_BOUND 1
 

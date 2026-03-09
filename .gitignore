@@ -1,2 +1,8 @@
 *.o
 *.txt
+.venv
+MLP
+cachegrind*
+callgrind*
+gmon*
+perf*
